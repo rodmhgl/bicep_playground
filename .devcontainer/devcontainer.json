@@ -1,0 +1,45 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "VARIANT": "ubuntu-22.04"
+    }
+  },
+  "extensions": [
+    "ms-azuretools.vscode-azureresourcegroups",
+    "ms-azuretools.vscode-bicep",
+    "editorconfig.editorconfig"
+  ],
+  "remoteUser": "vscode",
+  "features": {
+	"azure-cli": "latest",
+	"ghcr.io/devcontainers/features/terraform:1": {
+		"installSentinel": true,
+		"version": "latest",
+		"tflint": "latest",
+		"terragrunt": "latest"
+	},
+	"ghcr.io/devcontainers-contrib/features/infracost:1": {
+		"version": "latest"
+	},
+	"ghcr.io/devcontainers-contrib/features/k2tf:1": {
+		"version": "latest"
+	},
+	"ghcr.io/devcontainers-contrib/features/terraform-docs:1": {
+		"version": "latest"
+	},
+	"ghcr.io/devcontainers-contrib/features/terraform-ls-asdf:2": {
+		"version": "latest"
+	},
+	"ghcr.io/devcontainers-contrib/features/terragrunt:1": {
+		"version": "latest"
+	},
+	"ghcr.io/devcontainers-contrib/features/tfcdk-cli:1": {
+		"version": "latest"
+	},
+	"ghcr.io/devcontainers-contrib/features/tfsec:1": {
+		"version": "latest"
+	},
+	"ghcr.io/devcontainers-contrib/features/tfswitch:1": {}
+  }
+}
