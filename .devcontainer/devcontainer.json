@@ -5,11 +5,6 @@
       "VARIANT": "ubuntu-22.04"
     }
   },
-  "extensions": [
-    "ms-azuretools.vscode-azureresourcegroups",
-    "ms-azuretools.vscode-bicep",
-    "editorconfig.editorconfig"
-  ],
   "remoteUser": "vscode",
   "features": {
 	"azure-cli": "latest",
@@ -41,5 +36,14 @@
 		"version": "latest"
 	},
 	"ghcr.io/devcontainers-contrib/features/tfswitch:1": {}
-  }
+  },
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-azureresourcegroups",
+				"ms-azuretools.vscode-bicep",
+				"editorconfig.editorconfig"
+			]
+		}
+	}
 }
