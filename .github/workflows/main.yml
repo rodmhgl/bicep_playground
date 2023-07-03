@@ -23,15 +23,15 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az group delete --yes --name ${{ vars.AZURE_RG }} --only-show-errors
-          az group create --name ${{ vars.AZURE_RG }} --location ${{ vars.RESOURCE_GROUP_LOCATION }}
+          az group delete --yes --name ${{ vars.RESOURCE_GROUP_NAME }} --only-show-errors
+          az group create --name ${{ vars.RESOURCE_GROUP_NAME }} --location ${{ vars.RESOURCE_GROUP_LOCATION }}
 
       # Deploy Bicep file
     - name: deploy
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ vars.AZURE_RG }}
+        resourceGroupName: ${{ vars.RESOURCE_GROUP_NAME }}
         template: ./main.bicep
         parameters: 'environmentType=nonprod'
         failOnStdErr: false
