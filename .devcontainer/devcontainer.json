@@ -42,7 +42,12 @@
 			"extensions": [
 				"ms-azuretools.vscode-azureresourcegroups",
 				"ms-azuretools.vscode-bicep",
-				"editorconfig.editorconfig"
+				"editorconfig.editorconfig",
+				"github.vscode-github-actions",
+				"github.copilot",
+				"github.vscode-pull-request-github",
+				"eamodio.gitlens",
+				"hashicorp.terraform"
 			]
 		}
 	}
