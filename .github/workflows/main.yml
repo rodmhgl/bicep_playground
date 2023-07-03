@@ -3,6 +3,7 @@ name: Azure ARM
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: bicep_playground_nonprod
     steps:
 
       # Checkout code
@@ -28,5 +29,6 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ vars.RESOURCE_GROUP_NAME }}
         template: ./main.bicep
-        parameters: 'environmentType=nonprod'
+        parameters: ./main.parameters..json
+        # parameters: 'environmentType=nonprod'
         failOnStdErr: false
