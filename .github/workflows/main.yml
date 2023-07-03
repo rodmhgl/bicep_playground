@@ -23,7 +23,7 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az group delete --yes --name ${{ secrets.AZURE_RG }} --only-show-errors
+          az group delete --yes --name ${{ vars.AZURE_RG }} --only-show-errors
           az group create --name ${{ vars.AZURE_RG }} --location ${{ vars.RESOURCE_GROUP_LOCATION }}
 
       # Deploy Bicep file
