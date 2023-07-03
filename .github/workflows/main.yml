@@ -1,9 +1,12 @@
-on: [push]
+on:
+  push:
+  workflow_dispatch:
+
 name: Azure ARM
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: bicep_playground_nonprod
+    environment: nonprod
     steps:
 
       # Checkout code
@@ -14,21 +17,38 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Azure CLI script
+    - name: Create Azure Resource Group
       uses: azure/CLI@v1
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az group delete --yes --name ${{ vars.RESOURCE_GROUP_NAME }} --only-show-errors
+          az version
           az group create --name ${{ vars.RESOURCE_GROUP_NAME }} --location ${{ vars.RESOURCE_GROUP_LOCATION }}
 
-      # Deploy Bicep file
-    - name: deploy
-      uses: azure/arm-deploy@v1
+    - name: Preview Changes from Bicep
+      uses: Azure/deployment-what-if-action@v1.0.0
       with:
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ vars.RESOURCE_GROUP_NAME }}
-        template: ./main.bicep
-        parameters: ./main.parameters..json
-        # parameters: 'environmentType=nonprod'
-        failOnStdErr: false
+        subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        resourceGroup: ${{ vars.RESOURCE_GROUP_NAME }}
+        templateFile: ./main.bicep
+        additionalParemters: environmentType=nonprod
+
+
+    # - name: Azure CLI script
+    #   uses: azure/CLI@v1
+    #   with:
+    #     azcliversion: 2.30.0
+    #     inlineScript: |
+    #       az group delete --yes --name ${{ vars.RESOURCE_GROUP_NAME }} --only-show-errors
+    #       az group create --name ${{ vars.RESOURCE_GROUP_NAME }} --location ${{ vars.RESOURCE_GROUP_LOCATION }}
+
+    #   # Deploy Bicep file
+    # - name: deploy
+    #   uses: azure/arm-deploy@v1
+    #   with:
+    #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+    #     resourceGroupName: ${{ vars.RESOURCE_GROUP_NAME }}
+    #     template: ./main.bicep
+    #     parameters: ./main.parameters.${{ENVIRONMENT}}.json
+    #     # parameters: 'environmentType=nonprod'
+    #     failOnStdErr: false
