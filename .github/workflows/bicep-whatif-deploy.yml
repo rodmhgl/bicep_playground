@@ -15,9 +15,8 @@ permissions:
   pull-requests: write
 
 env:
-  LOCATION: "eastus"
   PREFIX: "azlab"
-  ENVIRONMENTTYPE: "nonprod"
+  ENVIRONMENT_TYPE: "nonprod"
 
 jobs:
   bicep-whatif:
@@ -52,7 +51,7 @@ jobs:
             --name validate-${{ github.run_id }} \
             --template-file main.bicep \
             --resource-group ${{ vars.RESOURCE_GROUP_NAME }} \
-            --parameters environmentType=${{ env.ENVIRONMENTTYPE }} \
+            --parameters ENVIRONMENT_TYPE:${{ env.ENVIRONMENT_TYPE}} \
             --parameters prefix=${{ env.PREFIX }}
 
     # Preview changes
@@ -64,7 +63,7 @@ jobs:
             --name whatif-${{ github.run_id }} \
             --template-file main.bicep \
             --resource-group ${{ vars.RESOURCE_GROUP_NAME }} \
-            --parameters environmentType=${{ env.ENVIRONMENTTYPE }} \
+            --parameters ENVIRONMENT_TYPE:${{ env.ENVIRONMENT_TYPE:}} \
             --parameters prefix=${{ env.PREFIX }} > whatif
 
       # Create string output of Whatif
@@ -138,5 +137,5 @@ jobs:
             --name deploy-${{ github.run_id }} \
             --template-file main.bicep \
             --resource-group ${{ vars.RESOURCE_GROUP_NAME }} \
-            --parameters environmentType=${{ env.ENVIRONMENTTYPE }} \
+            --parameters ENVIRONMENT_TYPE:${{ env.ENVIRONMENT_TYPE:}} \
             --parameters prefix=${{ env.PREFIX }}

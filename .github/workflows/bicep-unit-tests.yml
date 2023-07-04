@@ -10,7 +10,8 @@ on:
     - main
 
 env:
-  LOCATION: "eastus"
+  PREFIX: "azlab"
+  ENVIRONMENT_TYPE: "nonprod"
 
 #Special permissions required for OIDC authentication
 permissions:
@@ -51,7 +52,9 @@ jobs:
           az deployment group validate \
             --name validate-${{ github.run_id }} \
             --template-file main.bicep \
-            --location $LOCATION
+            --resource-group ${{ vars.RESOURCE_GROUP_NAME }} \
+            --parameters ENVIRONMENT_TYPE:${{ env.ENVIRONMENT_TYPE}} \
+            --parameters prefix=${{ env.PREFIX }}
 
     # Perform a security scan of the bicep code using checkov
     - name: Run Checkov action
