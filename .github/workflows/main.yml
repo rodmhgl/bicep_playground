@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:
-  ENVIRONMENT_TYPE: prod
+  ENVIRONMENT_TYPE: nonprod
 
 name: Azure ARM
 jobs:
@@ -37,6 +37,13 @@ jobs:
         parametersFile: ./main.parameters.${{ env.ENVIRONMENT_TYPE }}.json
         # additionalParameters: environmentType=${{ env.ENVIRONMENT_TYPE }}
 
+    - name: Request approval
+      if: ${{ github.ref == 'refs/heads/main' }}
+      uses: azure/approvals@v1
+      with:
+        poll-interval: 10
+        timeout-minutes: 1440
+        message: Approve the deployment of Azure Bicep resources.
 
     # - name: Azure CLI script
     #   uses: azure/CLI@v1
