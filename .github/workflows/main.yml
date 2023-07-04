@@ -54,7 +54,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             pull_number: pullRequest.number,
-            reviewers: ['username1', 'username2'],
+            reviewers: ['rodmhgl', ],
           });
 
     # - name: Azure CLI script
