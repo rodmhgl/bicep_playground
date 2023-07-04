@@ -54,7 +54,7 @@ jobs:
             --name validate-${{ github.run_id }} \
             --template-file main.bicep \
             --resource-group ${{ vars.RESOURCE_GROUP_NAME }} \
-            --parameters ENVIRONMENT_TYPE=${{ env.ENVIRONMENT_TYPE}} \
+            --parameters environmentType=${{ env.ENVIRONMENT_TYPE}} \
             --parameters prefix=${{ env.PREFIX }}
 
     # Perform a security scan of the bicep code using checkov
