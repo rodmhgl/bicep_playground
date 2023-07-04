@@ -16,6 +16,7 @@ env:
 #Special permissions required for OIDC authentication
 permissions:
   id-token: write
+  actions: read
   contents: read
   security-events: write
 
@@ -53,7 +54,7 @@ jobs:
             --name validate-${{ github.run_id }} \
             --template-file main.bicep \
             --resource-group ${{ vars.RESOURCE_GROUP_NAME }} \
-            --parameters ENVIRONMENT_TYP=${{ env.ENVIRONMENT_TYPE}} \
+            --parameters ENVIRONMENT_TYPE=${{ env.ENVIRONMENT_TYPE}} \
             --parameters prefix=${{ env.PREFIX }}
 
     # Perform a security scan of the bicep code using checkov
