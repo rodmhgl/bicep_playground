@@ -34,11 +34,6 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
 }
 
 module appService 'modules/appService.bicep' = {
-  //checkov:skip=CKV_AZURE_15:Lab Resource
-  //checkov:skip=CKV_AZURE_16:Lab Resource
-  //checkov:skip=CKV_AZURE_17:Lab Resource
-  //checkov:skip=CKV_AZURE_18:Lab Resource
-  //checkov:skip=CKV_AZURE_35:Lab Resource
   name: 'appService'
   params: {
     location: location
