@@ -34,7 +34,7 @@ jobs:
         templateFile: ./main.bicep
         subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroup: ${{ vars.RESOURCE_GROUP_NAME }}
-        parameters: ./main.parameters.${{ env.ENVIRONMENT_TYPE }}.json
+        parametersFile: ./main.parameters.${{ env.ENVIRONMENT_TYPE }}.json
         # additionalParameters: environmentType=${{ env.ENVIRONMENT_TYPE }}
 
 
