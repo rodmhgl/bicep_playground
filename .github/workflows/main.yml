@@ -2,6 +2,9 @@ on:
   push:
   workflow_dispatch:
 
+env:
+  ENVIRONMENT_TYPE: nonprod
+
 name: Azure ARM
 jobs:
   build-and-deploy:
@@ -28,10 +31,11 @@ jobs:
     - name: Preview Changes from Bicep
       uses: Azure/deployment-what-if-action@v1.0.0
       with:
+        templateFile: ./main.bicep
         subscription: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroup: ${{ vars.RESOURCE_GROUP_NAME }}
-        templateFile: ./main.bicep
-        additionalParameters: environmentType=prod
+        parameters: ./main.parameters.${{ env.ENVIRONMENT_TYPE }}.json
+        # additionalParameters: environmentType=${{ env.ENVIRONMENT_TYPE }}
 
 
     # - name: Azure CLI script
