@@ -39,11 +39,23 @@ jobs:
 
     - name: Request approval
       if: ${{ github.ref == 'refs/heads/main' }}
-      uses: azure/approvals@v1
+      uses: actions/github-script@v4
       with:
-        poll-interval: 10
-        timeout-minutes: 1440
-        message: Approve the deployment of Azure Bicep resources.
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const { data: pullRequest } = await github.pulls.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: 'Deploy Azure Bicep resources',
+            head: context.sha,
+            base: 'main',
+          });
+          await github.pulls.requestReviewers({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: pullRequest.number,
+            reviewers: ['username1', 'username2'],
+          });
 
     # - name: Azure CLI script
     #   uses: azure/CLI@v1
