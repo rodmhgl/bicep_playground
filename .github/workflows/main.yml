@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:
-  ENVIRONMENT_TYPE: nonprod
+  ENVIRONMENT_TYPE: prod
 
 name: Azure ARM
 jobs:
