@@ -21,6 +21,10 @@ resource appServicePlan 'Microsoft.Web/serverFarms@2022-03-01' = {
 }
 
 resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
+  //checkov:skip=CKV_AZURE_15:Lab Resource
+  //checkov:skip=CKV_AZURE_16:Lab Resource
+  //checkov:skip=CKV_AZURE_17:Lab Resource
+  //checkov:skip=CKV_AZURE_18:Lab Resource
   name: appServiceAppName
   location: location
   properties: {
